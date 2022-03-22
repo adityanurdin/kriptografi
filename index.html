@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+    />
+
+    <title>Kriptografi</title>
+  </head>
+  <body class="bg-info">
+    <div class="container mt-5 mb-5">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title text-center">
+            <h4>Encrypt & Decrypt System</h4>
+          </div>
+          <div class="from-group">
+            <label for="">Plain Text</label>
+            <input type="text" id="plainText" class="form-control" />
+          </div>
+          <div class="form-gorup">
+            <label for="">Salt Text</label>
+            <input type="text" id="saltText" class="form-control" />
+          </div>
+          <button id="encryptBtn" class="btn btn-primary mt-3">
+            <i class="bi bi-filetype-key"></i> Encrypt
+          </button>
+          <!-- <button id="encryptBtn" class="btn btn-danger mt-3">
+            <i class="bi bi-file-earmark-lock2-fill"></i> Decrypt
+          </button> -->
+          <p id="encryptTextResult">Your encrypt: -</p>
+
+          <hr />
+
+          <div class="from-group">
+            <label for="">Encrypt Text</label>
+            <input type="text" id="encryptText" class="form-control" />
+          </div>
+          <div class="form-gorup">
+            <label for="">Salt Text</label>
+            <input type="text" id="salt2Text" class="form-control" />
+          </div>
+          <button id="decryptBtn" class="btn btn-danger mt-3">
+            <i class="bi bi-filetype-key"></i> Decrypt
+          </button>
+
+          <p id="decryptTextResult">Your plain text: -</p>
+
+          <div class="card-footer">
+            &copy; 2022 &mdash; Kelompok 3 Kriptografi
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascript -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./js/crypto/rollups/aes.js"></script>
+    <script src="./js/encrypt.js"></script>
+
+    <script>
+      $("#encryptBtn").click(function () {
+        const plaintext = $("#plainText").val();
+        const salt = $("#saltText").val();
+        const encrypt = plaintext.encrypt(salt);
+        $("#encryptText").val(encrypt);
+        $("#encryptTextResult").html(`Your encrypt: ${encrypt}`);
+      });
+
+      $("#decryptBtn").click(function () {
+        const encryptText = $("#encryptText").val();
+        const salt2 = $("#salt2Text").val();
+        const decrypt = encryptText.decrypt(salt2);
+        if (decrypt) {
+          $("#decryptTextResult").html(`Your plain text: ${decrypt}`);
+        } else {
+          alert("Decrypt gagal !!!");
+        }
+      });
+    </script>
+  </body>
+</html>
